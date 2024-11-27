@@ -11,43 +11,66 @@ public class Calcular {
         
         public static void main(String[] args) {
         	  	
-        	   Random random = new Random(); 
-               System.out.println("30 números aleatorios entre 1 y 10:");
-               for (int i = 0; i < 30; i++) { 
-                   int numeroAleatorio = random.nextInt(10) + 1; 
-                   System.out.print(numeroAleatorio + " ");
-               }
-	        Scanner scanner = new Scanner(System.in);
-
-	        int num1, num2;
-	        do {
-	            System.out.print("Introduce el primer número: ");
-	            num1 = scanner.nextInt();
-
-	            System.out.print("Introduce el segundo número (debe ser distinto al primero): ");
-	            num2 = scanner.nextInt();
-
-	            if (num1 == num2) {
-	                System.out.println("Los números no pueden ser iguales. Intenta de nuevo.");
-	            }
-	        } while (num1 == num2);
-
-	        System.out.print("Introduce un tercer número: ");
-	        int num3 = scanner.nextInt();
-
-	        int menor = Math.min(num1, num2);
-	        int mayor = Math.max(num1, num2);
-
-	        System.out.println("Números entre " + menor + " y " + mayor + " incrementando de 7 en 7:");
-	        for (int i = menor; i <= mayor; i += 7) {
-	            System.out.println(i);
-	            if (i < num3 && num3 <= i + 7 && num3 <= mayor) {
-	                System.out.println("Número especial: " + num3);
-	            
-	            }
-	        }
-
-	        scanner.close();
+    		// TODO Auto-generated method stub
+    		
+    		//Crear el tablero
+    		char[][] tablero = new char[5][5];
+    		
+    		for (int i=0; i<5; i++) {
+    			for (int j=0; j<5; j++) {
+    				tablero[i][j] ='-';
+    		}
+    		}
+    		
+    		//Introducimos el lugar del barco
+    		Scanner sc = new Scanner(System.in); 
+    		Random aleatorio = new Random();
+    		
+    		int valorX = aleatorio.nextInt(5);
+    		int valorY = aleatorio.nextInt(5);
+    		
+    		
+    		// El codigo comentado siguiente pedía el valor del barco a buscar:
+    		//Se ha mejorado creando número aleatorios
+    		
+//    		System.out.println("Introduzca el valor de x: ");
+//    		int valorX = Integer.parseInt(sc.nextLine());
+//    		System.out.println("Introduzca el valor de y: ");
+//    		int valorY = Integer.parseInt(sc.nextLine());
+    		
+    		tablero[valorX][valorY]= 'O';
+    		
+    		//Visualizamos por pantalla en tablero
+    		for (int i=0; i<5; i++) {
+    			for (int j=0; j<5; j++) {
+    				System.out.print(tablero[i][j]);
+    			}
+    			System.out.println("\n       ");
+    		}
+    		
+    		//10 intentos para acertar
+    		
+    		System.out.println("Intenta acertar donde está mi barco");
+    		
+    		for (int i=0; i<10; i++) {
+    			System.out.println("introduzca el valor de X: ");
+    			int valor1 = Integer.parseInt(sc.nextLine());
+    			System.out.println("introduzca el valor de Y: ");
+    			int valor2 = Integer.parseInt(sc.nextLine());
+    			
+    			if (tablero[valor1][valor2] == 'O') {
+    				System.out.println("Acertaste. Has hundido mi barco");
+    				break;
+    			}else {
+    				System.out.println("Fallaste. Sigo vivo");
+    			}
+    			
+    			System.out.println("Te quedan " + (9 - i) + " intentos" );
+    			
+    			if (i==9) {
+    				System.out.println("HAS FALLADO");
+    			}
+    		}	
 	    }
 	}
 
